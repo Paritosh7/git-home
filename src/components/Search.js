@@ -20,6 +20,10 @@ function Search() {
     setSearchInput(e.target.value);
   }
 
+  function handleClick(userData) {
+    console.log(userData);
+  }
+
   // debouncing handleChange
   const debouncedChangeHandler = React.useMemo(
     () => debounce(handleChange, 300),
@@ -40,7 +44,11 @@ function Search() {
           {users.length > 0 ? (
             <ComboboxList>
               {users.slice(0, 10).map((result, index) => (
-                <ComboboxOption key={index} value={`${result.login}`} />
+                <ComboboxOption
+                  key={index}
+                  value={`${result.login}`}
+                  onClick={() => handleClick(result)}
+                />
               ))}
             </ComboboxList>
           ) : (

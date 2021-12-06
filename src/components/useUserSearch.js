@@ -5,15 +5,22 @@ function useUserSearch(searchTerm) {
    * giving users initial value as an array
    * is displaying no results found for a split second,
    * to avoid this I am using null as users initial value.
+   * users will be an array
    */
   const [users, setUsers] = React.useState(() => null);
 
   //   const cache = {};
-  function fetchCities(value) {
+  function fetchUsers(value) {
     // if (cache[value]) {
     //   return Promise.resolve(cache[value]);
     // }
-    return fetch(`https://api.github.com/search/users?q=${value}`)
+    return fetch(`https://api.github.com/search/users?q=${value}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${process.env.REACT_APP_GITHUB_KEY}
+        `,
+      },
+    })
       .then((res) => res.json())
       .then((result) => {
         console.log(result);
@@ -26,7 +33,7 @@ function useUserSearch(searchTerm) {
   React.useEffect(() => {
     if (searchTerm.trim() !== "") {
       let isFresh = true;
-      fetchCities(searchTerm).then((users) => {
+      fetchUsers(searchTerm).then((users) => {
         if (isFresh) setUsers(users);
       });
       return () => (isFresh = false);
