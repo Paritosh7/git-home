@@ -1,10 +1,55 @@
 import React from "react";
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+  ComboboxOptionText,
+} from "@reach/combobox";
+import "@reach/combobox/styles.css";
+import useUserSearch from "./useUserSearch";
+import { debounce } from "lodash";
 
 function Search() {
+  const [searchInput, setSearchInput] = React.useState("");
+  const users = useUserSearch(searchInput);
+  console.log(users);
+
+  function handleChange(e) {
+    setSearchInput(e.target.value);
+  }
+
+  // debouncing handleChange
+  const debouncedChangeHandler = React.useMemo(
+    () => debounce(handleChange, 300),
+    []
+  );
+
+  React.useEffect(() => {
+    return () => {
+      debouncedChangeHandler.cancel();
+    };
+  });
+
   return (
-    <form>
-      <input type="search" placeholder="Search Github username ..."></input>
-      <button></button>
-    </form>
+    <Combobox aria-label="Users">
+      <ComboboxInput onChange={debouncedChangeHandler}></ComboboxInput>
+      {users && (
+        <ComboboxPopover>
+          {users.length > 0 ? (
+            <ComboboxList>
+              {users.slice(0, 10).map((result, index) => (
+                <ComboboxOption key={index} value={`${result.login}`} />
+              ))}
+            </ComboboxList>
+          ) : (
+            <span style={{ display: "block", margin: 8 }}>No users found</span>
+          )}
+        </ComboboxPopover>
+      )}
+    </Combobox>
   );
 }
+
+export default Search;
