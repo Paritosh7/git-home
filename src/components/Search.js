@@ -52,7 +52,7 @@ function Search() {
               ))}
             </ComboboxList>
           ) : (
-            <span style={{ display: "block", margin: 8 }}>No users found</span>
+            <span>No users found</span>
           )}
         </ComboboxPopover>
       )}
