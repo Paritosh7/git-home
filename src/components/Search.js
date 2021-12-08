@@ -8,16 +8,27 @@ import {
   ComboboxOptionText,
 } from "@reach/combobox";
 import "@reach/combobox/styles.css";
-import useUserSearch from "./useUserSearch";
 import { debounce } from "lodash";
+import { client } from "./api-client";
+import { Spinner } from "./lib";
 
 function Search() {
-  const [searchInput, setSearchInput] = React.useState("");
-  const users = useUserSearch(searchInput);
-  console.log(users);
+  console.log("Search called");
+
+  const [status, setStatus] = React.useState("idle");
+  const [query, setQuery] = React.useState("");
+  const [queried, setQueried] = React.useState(false);
+  const [users, setUsers] = React.useState(null);
+  const [error, setError] = React.useState(null);
+
+  const isLoading = status === "loading";
+  const isSuccess = status === "success";
+  const isError = status === "error";
 
   function handleChange(e) {
-    setSearchInput(e.target.value);
+    console.log(e);
+    setQueried(true);
+    setQuery(e.target.value);
   }
 
   function handleClick(userData) {
@@ -31,32 +42,56 @@ function Search() {
   );
 
   React.useEffect(() => {
+    if (!queried) return;
+
+    setStatus("loading");
+    client(`search/users?q=${encodeURIComponent(query)}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Token ${process.env.REACT_APP_GITHUB_KEY}
+           `,
+      },
+    })
+      .then(({ items: users }) => {
+        console.log(users);
+        setUsers(users);
+        setStatus("success");
+      })
+      .catch((err) => {
+        setError(err);
+        setStatus("error");
+      });
+
     return () => {
       debouncedChangeHandler.cancel();
     };
-  });
+  }, [query, queried, debouncedChangeHandler]);
 
   return (
-    <Combobox aria-label="Users">
-      <ComboboxInput onChange={debouncedChangeHandler}></ComboboxInput>
-      {users && (
-        <ComboboxPopover>
-          {users.length > 0 ? (
-            <ComboboxList>
-              {users.slice(0, 10).map((result, index) => (
-                <ComboboxOption
-                  key={index}
-                  value={`${result.login}`}
-                  onClick={() => handleClick(result)}
-                />
-              ))}
-            </ComboboxList>
-          ) : (
-            <span>No users found</span>
-          )}
-        </ComboboxPopover>
-      )}
-    </Combobox>
+    <div style={{ display: "flex" }}>
+      <Combobox aria-label="Users">
+        <ComboboxInput onChange={debouncedChangeHandler}></ComboboxInput>
+        {users && (
+          <ComboboxPopover>
+            {users.length > 0 ? (
+              <ComboboxList>
+                {users.slice(0, 10).map((result, index) => (
+                  <ComboboxOption
+                    key={index}
+                    value={`${result.login}`}
+                    onClick={() => handleClick(result)}
+                  />
+                ))}
+              </ComboboxList>
+            ) : (
+              <span>No users found</span>
+            )}
+          </ComboboxPopover>
+        )}
+      </Combobox>
+
+      {isLoading ? <Spinner /> : null}
+    </div>
   );
 }
 

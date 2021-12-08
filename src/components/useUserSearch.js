@@ -1,4 +1,11 @@
 import React from "react";
+import { client } from "./api-client";
+
+/**
+ * This is a renderless React Component. I want this component to hold
+ * a status state (idle, loading, success, error). Since I am not sure
+ * how to do that atm, I am not using it.
+ */
 
 function useUserSearch(searchTerm) {
   /**
@@ -9,33 +16,22 @@ function useUserSearch(searchTerm) {
    */
   const [users, setUsers] = React.useState(() => null);
 
-  //   const cache = {};
-  function fetchUsers(value) {
-    // if (cache[value]) {
-    //   return Promise.resolve(cache[value]);
-    // }
-    return fetch(`https://api.github.com/search/users?q=${value}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Token ${process.env.REACT_APP_GITHUB_KEY}
-        `,
-      },
-    })
-      .then((res) => res.json())
-      .then((result) => {
-        console.log(result);
-        const { items } = result;
-        // cache[value] = items;
-        return items;
-      });
-  }
-
   React.useEffect(() => {
     if (searchTerm.trim() !== "") {
       let isFresh = true;
-      fetchUsers(searchTerm).then((users) => {
-        if (isFresh) setUsers(users);
-      });
+      client(`search/users?q=${encodeURIComponent(searchTerm)}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Token ${process.env.REACT_APP_GITHUB_KEY}
+             `,
+        },
+      })
+        .then(({ items: users }) => {
+          if (isFresh) setUsers(users);
+        })
+        .catch((err) => {
+          return Promise.reject(err);
+        });
       return () => (isFresh = false);
     }
   }, [searchTerm]);
