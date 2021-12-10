@@ -6,7 +6,6 @@ function client(endpoint, customConfig = {}) {
 
   return fetch(`${process.env.REACT_APP_API_URL}/${endpoint}`, config).then(
     async (response) => {
-      console.log("hello");
       const data = await response.json();
       if (response.ok) {
         return data;

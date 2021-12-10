@@ -12,7 +12,7 @@ const spin = keyframes`
 `;
 
 const Spinner = styled(FaSpinner)`
-  animation: ${spin} 2s linear infinite;
+  animation: ${spin} 1s linear infinite;
 `;
 
 export { Spinner };

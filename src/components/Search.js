@@ -12,7 +12,7 @@ import { debounce } from "lodash";
 import { client } from "./api-client";
 import { Spinner } from "./lib";
 
-function Search() {
+function Search({ provideUser }) {
   console.log("Search called");
 
   const [status, setStatus] = React.useState("idle");
@@ -32,7 +32,7 @@ function Search() {
   }
 
   function handleClick(userData) {
-    console.log(userData);
+    provideUser(userData.login);
   }
 
   // debouncing handleChange
@@ -42,7 +42,7 @@ function Search() {
   );
 
   React.useEffect(() => {
-    if (!queried) return;
+    if (!queried || query === "") return;
 
     setStatus("loading");
     client(`search/users?q=${encodeURIComponent(query)}`, {

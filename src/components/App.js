@@ -1,11 +1,11 @@
 import Header from "./Header";
-import Search from "./Search";
+import Main from "./Main";
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Search />
+      <Main />
     </div>
   );
 }
