@@ -2,17 +2,23 @@ import React from "react";
 import Profile from "./Profile";
 import Search from "./Search";
 
-function Main() {
-  const [user, setUser] = React.useState(null);
+/**
+ * Main only has the userName
+ * The username is being fetched from Search
+ * & passed to Profile.
+ */
 
-  function fetchUser(user) {
-    setUser(user);
+function Main() {
+  const [userName, setuserName] = React.useState(null);
+
+  function fetchUserName(userName) {
+    setuserName(userName);
   }
 
   return (
     <div>
-      <Search provideUser={fetchUser} />
-      <Profile userName={user} />
+      <Search provideUser={fetchUserName} />
+      <Profile userName={userName} />
     </div>
   );
 }

@@ -12,8 +12,7 @@ function Profile({ userName }) {
     client(`users/${userName}`, {
       method: "GET",
       headers: {
-        Authorization: `Token ${process.env.REACT_APP_GITHUB_KEY}
-             `,
+        Authorization: `Token ${process.env.REACT_APP_GITHUB_KEY}`,
       },
     })
       .then((data) => {

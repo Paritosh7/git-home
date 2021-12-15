@@ -12,6 +12,11 @@ import { debounce } from "lodash";
 import { client } from "./api-client";
 import { Spinner } from "./lib";
 
+/**
+ * This component will search for username
+ * and pass username to Main Component
+ */
+
 function Search({ provideUser }) {
   console.log("Search called");
 
