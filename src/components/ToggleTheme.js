@@ -1,6 +1,7 @@
 import React from "react";
 import { MdLightMode } from "react-icons/md";
 import { RiMoonFill } from "react-icons/ri";
+import styled from "styled-components/macro";
 
 /**
  * themeState : true for LIGHT and false for dark
@@ -15,12 +16,18 @@ function ToggleTheme() {
     setThemeState((prevThemeState) => !prevThemeState);
   }
   return (
-    <div>
-      <button onClick={changeTheme}>
-        {themeText} {themeText === "LIGHT" ? <MdLightMode /> : <RiMoonFill />}
-      </button>
-    </div>
+    <ButtonWrapper onClick={changeTheme}>
+      {themeText} {themeText === "LIGHT" ? <MdLightMode /> : <RiMoonFill />}
+    </ButtonWrapper>
   );
 }
+
+const ButtonWrapper = styled.button`
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background-color: var(--color-light-background);
+  border: none;
+`;
 
 export default ToggleTheme;

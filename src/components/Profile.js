@@ -1,10 +1,15 @@
 import React from "react";
 import { client } from "./api-client";
+import { Spinner } from "./lib";
 
 function Profile({ userName }) {
   const [state, setState] = React.useState("idle");
   const [error, setError] = React.useState(null);
   const [profileData, setProfileData] = React.useState(null);
+
+  const isSuccess = state === "success";
+  const isLoading = state === "loading";
+  const isError = state === "error";
 
   React.useEffect(() => {
     if (!userName) return;
@@ -25,7 +30,23 @@ function Profile({ userName }) {
       });
   }, [userName]);
 
-  return <div>{profileData ? <label>{profileData.id}</label> : "Profile"}</div>;
+  return (
+    <div>
+      {!userName && <p>Nothing to show</p>}
+
+      {isLoading && <Spinner />}
+
+      {isSuccess ? (
+        <div>
+          <label>{profileData.login}</label>
+          <label>{profileData.name}</label>
+          <label>{profileData.company}</label>
+          <label>{profileData.followers}</label>
+          <label>{profileData.following}</label>
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 export default Profile;

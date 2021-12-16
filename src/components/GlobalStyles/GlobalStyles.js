@@ -28,6 +28,8 @@ html, body {
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  font-family: 'Space Mono', monospace;
+  background-color: hsl(227 100% 98%);
 }
 /*
   6. Improve media defaults
@@ -53,6 +55,12 @@ p, h1, h2, h3, h4, h5, h6 {
 */
 #root, #__next {
   isolation: isolate;
+}
+
+:root{
+  --color-light-background : hsl(227, 100%, 98%);
+  --color-light-main: hsl(0,0%,100%);
+  --color-light-button : hsl(212,100%,50%);
 }
 
 `;
