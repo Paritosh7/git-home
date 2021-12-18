@@ -17,16 +17,23 @@ function ToggleTheme() {
   }
   return (
     <ButtonWrapper onClick={changeTheme}>
-      {themeText} {themeText === "LIGHT" ? <MdLightMode /> : <RiMoonFill />}
+      <ThemeName>{themeText}</ThemeName>{" "}
+      {themeText === "LIGHT" ? <MdLightMode /> : <RiMoonFill />}
     </ButtonWrapper>
   );
 }
+
+const ThemeName = styled.span`
+  margin-right: 8px;
+`;
 
 const ButtonWrapper = styled.button`
   display: flex;
   align-items: center;
   padding: 0;
   background-color: var(--color-light-background);
+  color: var(--color-light-greyed-out);
+  font-weight: 700;
   border: none;
 `;
 

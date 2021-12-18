@@ -14,6 +14,7 @@ function Header() {
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: 28px 16px 0 16px;
 `;
 
 export default Header;

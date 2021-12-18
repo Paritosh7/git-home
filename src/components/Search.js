@@ -76,9 +76,13 @@ function Search({ provideUser }) {
 
   return (
     <SearchWrapper>
-      <IoSearchOutline />
-      <Combobox aria-label="Users">
-        <Input onChange={debouncedChangeHandler}></Input>
+      <LogoSearch size={22} />
+
+      <InputWrapper aria-label="Users">
+        <Input
+          onChange={debouncedChangeHandler}
+          placeholder="Search Github username..."
+        ></Input>
         {users && (
           <ComboboxPopover>
             {users.length > 0 ? (
@@ -96,7 +100,7 @@ function Search({ provideUser }) {
             )}
           </ComboboxPopover>
         )}
-      </Combobox>
+      </InputWrapper>
       <SearchButton>{isLoading ? <Spinner /> : "Search"}</SearchButton>
     </SearchWrapper>
   );
@@ -106,12 +110,26 @@ const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
   background-color: var(--color-light-main);
-  margin: 0 8px 0 8px;
-  border-radius: 12px;
+  margin: 28px 16px 0 16px;
+  border-radius: 16px;
+  font-size: 13px;
+`;
+
+const LogoSearch = styled(IoSearchOutline)`
+  color: var(--color-light-button);
+  flex: 0 0 28px;
+  margin-left: 8px;
+`;
+
+const InputWrapper = styled(Combobox)`
+  border: none;
+  flex: 1 0 0;
 `;
 
 const Input = styled(ComboboxInput)`
-  padding: 16px 0 16px 0;
+  width: 100%;
+  padding: 18px 0 18px 4px;
+  border: none;
 `;
 // Todo : need to think about min and max-width
 const SearchButton = styled.button`
@@ -121,7 +139,9 @@ const SearchButton = styled.button`
   min-width: 84px;
   max-width: 106px;
   border-radius: 12px;
+  font-weight: 700;
   color: white;
+  margin-right: 6px;
 `;
 
 export default Search;
