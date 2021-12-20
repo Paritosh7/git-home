@@ -1,10 +1,16 @@
+import styled from "styled-components";
+
 const ContactInfoTile = ({ Component: Icon, infoText }) => {
   return (
-    <div>
+    <Wrapper>
       <Icon />
       <span>{infoText}</span>
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+`;
 
 export default ContactInfoTile;

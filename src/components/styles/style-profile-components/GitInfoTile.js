@@ -1,12 +1,19 @@
 import styled from "styled-components";
 
-const GitInfoTile = ({ labelText, countPubRepos }) => {
+const GitInfoTile = ({ labelText, count }) => {
   return (
-    <div>
+    <Wrapper>
       <label>{labelText}</label>
-      <label>{countPubRepos}</label>
-    </div>
+      <label>{count}</label>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  padding: 8px;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export default GitInfoTile;

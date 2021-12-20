@@ -8,6 +8,8 @@ import { FaTwitter } from "react-icons/fa";
 import { MdWork } from "react-icons/md";
 import GitInfoTile from "./styles/style-profile-components/GitInfoTile";
 import ContactInfoTile from "./styles/style-profile-components/ContactInfoTile";
+import AvatarCardBasic from "./styles/style-profile-components/AvatarCard";
+import GitInfoCard from "./styles/style-profile-components/GitInfoCard";
 
 function Profile({ userName }) {
   const [state, setState] = React.useState("idle");
@@ -45,40 +47,21 @@ function Profile({ userName }) {
 
       {isSuccess ? (
         <article>
-          <ProfileHead>
-            <ProfileImage
-              alt={`${profileData.name} profile`}
-              src={profileData.avatar_url}
-            ></ProfileImage>
-            <ProfileInitial>
-              <h1>{profileData.name}</h1>
-              <h3>{profileData.login}</h3>
-              <p>{`Joined ${new Date(
-                profileData.created_at
-              ).toLocaleDateString()}`}</p>
-            </ProfileInitial>
-          </ProfileHead>
-          <section>
-            <p>
-              {profileData.bio
-                ? `${profileData.bio}`
-                : `This profile has no bio`}
-            </p>
-            <div>
-              <GitInfoTile
-                labelText="Respos"
-                countPubRepos={profileData.public_repos}
-              />
-              <GitInfoTile
-                labelText="Followers"
-                countPubRepos={profileData.public_repos}
-              />
-              <GitInfoTile
-                labelText="Following"
-                countPubRepos={profileData.following}
-              />
-            </div>
-          </section>
+          <AvatarCardBasic
+            avatar={profileData.avatar_url}
+            name={profileData.name}
+            login={profileData.login}
+            date={new Date(profileData.created_at).toLocaleDateString()}
+          />
+          <p>
+            {profileData.bio ? `${profileData.bio}` : `This profile has no bio`}
+          </p>
+
+          <GitInfoCard
+            countRepos={profileData.public_repos}
+            followers={profileData.followers}
+            following={profileData.following}
+          />
           <section>
             <ContactInfoTile
               Component={MdLocationOn}
@@ -106,22 +89,6 @@ const ProfileWrapper = styled.main`
   margin: 8px 16px 0 16px;
   padding: 16px;
   border-radius: 16px;
-`;
-
-const ProfileHead = styled.section`
-  display: flex;
-  align-items: center;
-`;
-
-const ProfileImage = styled.img`
-  min-width: 70px;
-  max-width: 117px;
-  flex: 0.5 0.5 0;
-  border-radius: 50%;
-`;
-
-const ProfileInitial = styled.div`
-  margin-left: 20px;
 `;
 
 export default Profile;
