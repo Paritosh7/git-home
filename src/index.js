@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
-import GlobalStyles from "./components/GlobalStyles/GlobalStyles";
+import GlobalStyles from "./components/styles/GlobalStyles/GlobalStyles";
 
 ReactDOM.render(
   <React.StrictMode>
