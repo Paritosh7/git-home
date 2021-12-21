@@ -2,6 +2,8 @@ import React from "react";
 import { MdLightMode } from "react-icons/md";
 import { RiMoonFill } from "react-icons/ri";
 import styled from "styled-components/macro";
+import { InlineSpacer } from "./styles/common/Spacing";
+import { SpanText } from "./styles/common/Text";
 
 /**
  * themeState : true for LIGHT and false for dark
@@ -17,24 +19,29 @@ function ToggleTheme() {
   }
   return (
     <ButtonWrapper onClick={changeTheme}>
-      <ThemeName>{themeText}</ThemeName>{" "}
-      {themeText === "LIGHT" ? <MdLightMode /> : <RiMoonFill />}
+      <SpanText>{themeText}</SpanText>
+      <InlineSpacer size={12} />
+      {themeText === "LIGHT" ? (
+        <MdLightMode size={20} />
+      ) : (
+        <RiMoonFill size={20} />
+      )}
     </ButtonWrapper>
   );
 }
-
-const ThemeName = styled.span`
-  margin-right: 8px;
-`;
 
 const ButtonWrapper = styled.button`
   display: flex;
   align-items: center;
   padding: 0;
   background-color: var(--color-light-background);
-  color: var(--color-light-greyed-out);
+  color: var(--color-light-text);
   font-weight: 700;
   border: none;
+
+  &:hover {
+    color: var(--color-light-black-full);
+  }
 `;
 
 export default ToggleTheme;

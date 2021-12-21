@@ -10,6 +10,8 @@ import GitInfoTile from "./styles/style-profile-components/GitInfoTile";
 import ContactInfoTile from "./styles/style-profile-components/ContactInfoTile";
 import AvatarCardBasic from "./styles/style-profile-components/AvatarCard";
 import GitInfoCard from "./styles/style-profile-components/GitInfoCard";
+import { Para } from "./styles/common/Text";
+import { Spacer } from "./styles/common/Spacing";
 
 function Profile({ userName }) {
   const [state, setState] = React.useState("idle");
@@ -53,28 +55,41 @@ function Profile({ userName }) {
             login={profileData.login}
             date={new Date(profileData.created_at).toLocaleDateString()}
           />
-          <p>
+          <Spacer size={32} />
+          <Para>
             {profileData.bio ? `${profileData.bio}` : `This profile has no bio`}
-          </p>
-
+          </Para>
+          <Spacer size={24} />
           <GitInfoCard
             countRepos={profileData.public_repos}
             followers={profileData.followers}
             following={profileData.following}
           />
+          <Spacer size={24} />
           <section>
             <ContactInfoTile
               Component={MdLocationOn}
-              infoText={profileData.location}
+              infoText={
+                profileData.location ? profileData.location : "Not Available"
+              }
             />
-            <ContactInfoTile Component={HiLink} infoText={profileData.blog} />
+            <ContactInfoTile
+              Component={HiLink}
+              infoText={profileData.blog ? profileData.blog : "Not Available"}
+            />
             <ContactInfoTile
               Component={FaTwitter}
-              infoText={profileData.twitter_username}
+              infoText={
+                profileData.twitter_username
+                  ? profileData.twitter_username
+                  : "Not Available"
+              }
             />
             <ContactInfoTile
               Component={MdWork}
-              infoText={profileData.company}
+              infoText={
+                profileData.company ? profileData.company : "Not Available"
+              }
             />
           </section>
         </article>
@@ -87,7 +102,7 @@ const ProfileWrapper = styled.main`
   color: var(--color-light-text);
   background-color: var(--color-light-main);
   margin: 8px 16px 0 16px;
-  padding: 16px;
+  padding: 24px;
   border-radius: 16px;
 `;
 

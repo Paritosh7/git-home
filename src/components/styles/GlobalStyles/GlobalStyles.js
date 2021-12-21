@@ -63,6 +63,8 @@ p, h1, h2, h3, h4, h5, h6 {
   --color-light-button : hsl(212,100%,50%);
   --color-light-greyed-out : hsl(217,20%,51%);
   --color-light-text : hsl(217,35%,45%);
+  --color-light-text-fifty-opacity : hsl(217,35%, 45%, 50%);
+  --color-light-black-full : hsl(217, 21%, 21%);
 }
 
 `;

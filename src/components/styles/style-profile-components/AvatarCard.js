@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { HeadingOne, HeadingThree } from "../common/Headings";
+import { Para } from "../common/Text";
 
 const AvatarCardBasic = ({ avatar, name, login, date }) => {
   return (
@@ -6,10 +8,10 @@ const AvatarCardBasic = ({ avatar, name, login, date }) => {
       <Avatar alt={`${name} profile`} src={avatar}></Avatar>
       <BasicInfoWrapper>
         <div>
-          <h1>{name}</h1>
-          <h3>{login}</h3>
+          <HeadingOne>{name}</HeadingOne>
+          <HeadingThree>{login}</HeadingThree>
         </div>
-        <p>{`Joined ${date}`}</p>
+        <Para>{`Joined ${date}`}</Para>
       </BasicInfoWrapper>
     </CardWrapper>
   );

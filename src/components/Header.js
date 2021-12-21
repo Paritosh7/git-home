@@ -15,6 +15,10 @@ const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 28px 16px 0 16px;
+
+  & > h1 {
+    font-size: 26px;
+  }
 `;
 
 export default Header;

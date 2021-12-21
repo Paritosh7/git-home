@@ -4,7 +4,7 @@ import styled from "styled-components";
 const GitInfoCard = ({ countRepos, followers, following }) => {
   return (
     <Wrapper>
-      <GitInfoTile labelText="Respos" count={countRepos} />
+      <GitInfoTile labelText="Repos" count={countRepos} />
       <GitInfoTile labelText="Followers" count={followers} />
       <GitInfoTile labelText="Following" count={following} />
     </Wrapper>
