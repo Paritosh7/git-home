@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { HeadingFour } from "../common/Headings";
+import { SpanText } from "../common/Text";
 
 const GitInfoTile = ({ labelText, count }) => {
   return (
     <Wrapper>
       <HeadingFour>{labelText}</HeadingFour>
-      <span>{count}</span>
+      <SpanText>{count}</SpanText>
     </Wrapper>
   );
 };

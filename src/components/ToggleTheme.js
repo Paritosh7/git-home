@@ -19,7 +19,7 @@ function ToggleTheme() {
   }
   return (
     <ButtonWrapper onClick={changeTheme}>
-      <SpanText>{themeText}</SpanText>
+      <span>{themeText}</span>
       <InlineSpacer size={12} />
       {themeText === "LIGHT" ? (
         <MdLightMode size={20} />
@@ -38,6 +38,10 @@ const ButtonWrapper = styled.button`
   color: var(--color-light-text);
   font-weight: 700;
   border: none;
+
+  & > span {
+    font-size: 13px;
+  }
 
   &:hover {
     color: var(--color-light-black-full);

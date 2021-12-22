@@ -4,8 +4,12 @@ const Para = ({ children }) => {
   return <P>{children}</P>;
 };
 
-const SpanText = ({ children }) => {
-  return <Span>{children}</Span>;
+const SpanText = ({ children, color, weight }) => {
+  return (
+    <Span color={color} weight={weight}>
+      {children}
+    </Span>
+  );
 };
 
 const Anchored = ({ children }) => {
@@ -20,10 +24,20 @@ const A = styled.a`
 
 const P = styled.p`
   font-size: 13px;
+
+  @media (min-width: 700px) {
+    font-size: 15px;
+  }
 `;
 
 const Span = styled.span`
-  font-size: 13px;
+  font-size: 16px;
+  color: ${(p) => p.color};
+  font-weight: ${(p) => p.weight};
+
+  @media (min-width: 700px) {
+    font-size: 22px;
+  }
 `;
 
 export { Para, SpanText, Anchored };

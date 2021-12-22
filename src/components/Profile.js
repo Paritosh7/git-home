@@ -56,47 +56,79 @@ function Profile({ userName }) {
             date={new Date(profileData.created_at).toLocaleDateString()}
           />
           <Spacer size={32} />
-          <Para>
-            {profileData.bio ? `${profileData.bio}` : `This profile has no bio`}
-          </Para>
-          <Spacer size={24} />
-          <GitInfoCard
-            countRepos={profileData.public_repos}
-            followers={profileData.followers}
-            following={profileData.following}
-          />
-          <Spacer size={24} />
-          <section>
-            <ContactInfoTile
-              Component={MdLocationOn}
-              infoText={
-                profileData.location ? profileData.location : "Not Available"
-              }
+          <LayoutShift>
+            <Para>
+              {profileData.bio
+                ? `${profileData.bio}`
+                : `This profile has no bio`}
+            </Para>
+            <Spacer size={24} />
+            <GitInfoCard
+              countRepos={profileData.public_repos}
+              followers={profileData.followers}
+              following={profileData.following}
             />
-            <ContactInfoTile
-              Component={HiLink}
-              infoText={profileData.blog ? profileData.blog : "Not Available"}
-            />
-            <ContactInfoTile
-              Component={FaTwitter}
-              infoText={
-                profileData.twitter_username
-                  ? profileData.twitter_username
-                  : "Not Available"
-              }
-            />
-            <ContactInfoTile
-              Component={MdWork}
-              infoText={
-                profileData.company ? profileData.company : "Not Available"
-              }
-            />
-          </section>
+            <Spacer size={24} />
+            <ContactInfoWrapper>
+              <div>
+                <ContactInfoTile
+                  Component={MdLocationOn}
+                  infoText={
+                    profileData.location
+                      ? profileData.location
+                      : "Not Available"
+                  }
+                />
+                <ContactInfoTile
+                  Component={HiLink}
+                  infoText={
+                    profileData.blog ? profileData.blog : "Not Available"
+                  }
+                />
+              </div>
+              <div>
+                <ContactInfoTile
+                  Component={FaTwitter}
+                  infoText={
+                    profileData.twitter_username
+                      ? profileData.twitter_username
+                      : "Not Available"
+                  }
+                />
+                <ContactInfoTile
+                  Component={MdWork}
+                  infoText={
+                    profileData.company ? profileData.company : "Not Available"
+                  }
+                />
+              </div>
+            </ContactInfoWrapper>
+          </LayoutShift>
         </article>
       ) : null}
     </ProfileWrapper>
   );
 }
+
+const LayoutShift = styled.div`
+  @media (min-width: 1000px) {
+    margin-top: -56px;
+    margin-left: 136px;
+  }
+`;
+
+const ContactInfoWrapper = styled.section`
+  display: flex;
+  flex-direction: column;
+
+  & > div {
+    flex: 1;
+  }
+
+  @media (min-width: 700px) {
+    flex-direction: row;
+  }
+`;
 
 const ProfileWrapper = styled.main`
   color: var(--color-light-text);
