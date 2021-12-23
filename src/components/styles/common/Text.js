@@ -1,28 +1,12 @@
 import styled from "styled-components";
 
-const Para = ({ children }) => {
-  return <P>{children}</P>;
-};
-
-const SpanText = ({ children, color, weight }) => {
-  return (
-    <Span color={color} weight={weight}>
-      {children}
-    </Span>
-  );
-};
-
-const Anchored = ({ children }) => {
-  return <A>{children}</A>;
-};
-
-const A = styled.a`
+const Anchored = styled.a`
   &::before {
     content: "@";
   }
 `;
 
-const P = styled.p`
+const Para = styled.p`
   font-size: 13px;
 
   @media (min-width: 700px) {
@@ -30,7 +14,7 @@ const P = styled.p`
   }
 `;
 
-const Span = styled.span`
+const SpanText = styled.span`
   font-size: 16px;
   color: ${(p) => p.color};
   font-weight: ${(p) => p.weight};
